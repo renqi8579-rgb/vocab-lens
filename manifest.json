@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Vocab Lens",
+  "version": "0.2.0",
+  "description": "选词翻译、自动保存例句，并在网页中高亮复习生词。",
+  "permissions": ["storage", "contextMenus"],
+  "host_permissions": [
+    "https://translate.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Vocab Lens",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

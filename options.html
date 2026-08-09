@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vocab Lens 单词本</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">VOCAB LENS</div>
+        <h1>我的网页单词本</h1>
+        <p>记录真实阅读场景，专门抓住那些反复记不住的词。</p>
+      </div>
+      <div class="top-actions">
+        <button id="importButton" class="button secondary" type="button">导入</button>
+        <input id="importFile" type="file" accept="application/json" hidden />
+        <button id="exportButton" class="button secondary" type="button">导出备份</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary" aria-label="学习概览">
+        <div><span>总词数</span><strong id="totalWords">0</strong></div>
+        <div><span>累计认出</span><strong id="totalKnown">0</strong></div>
+        <div><span>累计未认出</span><strong id="totalUnknown">0</strong></div>
+        <div class="danger-stat"><span>易忘词</span><strong id="difficultWords">0</strong></div>
+      </section>
+
+      <details class="manual-add">
+        <summary>手动添加单词</summary>
+        <form id="addForm">
+          <label>单词或短语<input name="word" required maxlength="100" placeholder="例如 reference" /></label>
+          <label>中文释义<input name="meaning" required maxlength="500" placeholder="例如 参考；提及" /></label>
+          <label class="wide">例句（可选）<textarea name="sentence" rows="2" maxlength="500"></textarea></label>
+          <button class="button primary" type="submit">加入单词本</button>
+        </form>
+      </details>
+
+      <section class="toolbar">
+        <input id="searchInput" type="search" placeholder="搜索单词、释义或例句" />
+        <select id="filterSelect" aria-label="筛选">
+          <option value="all">全部单词</option>
+          <option value="difficult">易忘词</option>
+          <option value="never-reviewed">从未复习</option>
+          <option value="last-unknown">最近未认出</option>
+        </select>
+        <select id="sortSelect" aria-label="排序">
+          <option value="recent">最近添加</option>
+          <option value="difficult">最容易忘</option>
+          <option value="alpha">字母顺序</option>
+        </select>
+      </section>
+
+      <div id="wordList" class="word-list"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <strong>这里还没有符合条件的单词</strong>
+        <span>去任意英文网页选中一个词，点击“+ 译”开始收集。</span>
+      </div>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="options.js"></script>
+  </body>
+</html>

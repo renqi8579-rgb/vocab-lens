@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vocab Lens</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <div class="eyebrow">VOCAB LENS</div>
+          <h1>网页生词镜</h1>
+        </div>
+        <label class="switch" title="总开关">
+          <input id="enabled" type="checkbox" />
+          <span></span>
+        </label>
+      </header>
+
+      <p id="status" class="status"></p>
+
+      <section class="stats" aria-label="复习统计">
+        <div><strong id="wordCount">0</strong><span>已收录</span></div>
+        <div><strong id="unknownCount">0</strong><span>未认出</span></div>
+        <div><strong id="difficultCount">0</strong><span>易忘词</span></div>
+      </section>
+
+      <label class="setting-row">
+        <span><b>网页高亮</b><small>标黄所有已收录单词</small></span>
+        <input id="highlightEnabled" type="checkbox" />
+      </label>
+      <label class="setting-row">
+        <span><b>选词按钮</b><small>选中英文后显示“+ 译”</small></span>
+        <input id="collectButtonEnabled" type="checkbox" />
+      </label>
+
+      <section class="voice-setting">
+        <div class="voice-setting-head">
+          <span><b>英文朗读声音</b><small>默认优先自然度更高的系统声音</small></span>
+          <button id="previewVoice" type="button">试听</button>
+        </div>
+        <select id="speechVoice" aria-label="英文朗读声音">
+          <option value="">自动选择（推荐）</option>
+        </select>
+      </section>
+
+      <button id="openWordbook" class="primary" type="button">打开单词本</button>
+      <p class="hint">提示：修改开关后刷新已打开的网页可确保立即生效。</p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,375 @@
+.vocab-lens-ui,
+.vocab-lens-ui * {
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+.vocab-lens-highlight {
+  background: linear-gradient(transparent 8%, #fff17a 8%, #fff17a 92%, transparent 92%) !important;
+  border-radius: 2px !important;
+  color: inherit !important;
+  cursor: help !important;
+  box-decoration-break: clone !important;
+  -webkit-box-decoration-break: clone !important;
+}
+
+.vocab-lens-highlight:hover {
+  background: #ffe24a !important;
+}
+
+.vocab-lens-collect-button {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  min-width: 52px !important;
+  height: 32px !important;
+  padding: 0 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 16px !important;
+  background: #202124 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28) !important;
+  color: #fff !important;
+  cursor: pointer !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 30px !important;
+}
+
+.vocab-lens-collector,
+.vocab-lens-review-card {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  width: min(390px, calc(100vw - 20px)) !important;
+  border: 1px solid #5f6368 !important;
+  border-radius: 22px !important;
+  background: #181a1b !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.36) !important;
+  color: #f1f3f4 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.vocab-lens-collector {
+  padding: 18px !important;
+}
+
+.vocab-lens-collector-head,
+.vocab-lens-review-head,
+.vocab-lens-review-footer,
+.vocab-lens-collector-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+
+.vocab-lens-collector-word,
+.vocab-lens-review-head strong {
+  overflow: hidden !important;
+  color: #f1f3f4 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.vocab-lens-icon-button {
+  flex: 0 0 auto !important;
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: #35383a !important;
+  color: #e8eaed !important;
+  cursor: pointer !important;
+  font-size: 22px !important;
+  line-height: 28px !important;
+}
+
+.vocab-lens-field {
+  display: block !important;
+  margin: 14px 0 10px !important;
+}
+
+.vocab-lens-field span {
+  display: block !important;
+  margin-bottom: 5px !important;
+  color: #bdc1c6 !important;
+  font-size: 12px !important;
+}
+
+.vocab-lens-field textarea {
+  display: block !important;
+  width: 100% !important;
+  min-height: 58px !important;
+  padding: 9px 10px !important;
+  resize: vertical !important;
+  border: 1px solid #5f6368 !important;
+  border-radius: 9px !important;
+  outline: none !important;
+  background: #202124 !important;
+  color: #f1f3f4 !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+}
+
+.vocab-lens-field textarea:focus {
+  border-color: #8ab4f8 !important;
+}
+
+.vocab-lens-source-sentence,
+.vocab-lens-review-sentence {
+  overflow: hidden !important;
+  color: #bdc1c6 !important;
+  font-size: 12px !important;
+}
+
+.vocab-lens-source-sentence {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+.vocab-lens-review-sentence {
+  display: block !important;
+  margin-top: 8px !important;
+  padding: 4px 12px !important;
+  border-left: 3px solid #5f6368 !important;
+  border-radius: 0 8px 8px 0 !important;
+  background: #202224 !important;
+}
+
+.vocab-lens-review-sentence-line {
+  display: -webkit-box !important;
+  padding: 7px 0 !important;
+  overflow: hidden !important;
+  line-height: 1.5 !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+.vocab-lens-review-sentence-line + .vocab-lens-review-sentence-line {
+  border-top: 1px solid #34383b !important;
+}
+
+.vocab-lens-collector-status {
+  min-height: 20px !important;
+  margin-top: 9px !important;
+  color: #9aa0a6 !important;
+  font-size: 12px !important;
+}
+
+.vocab-lens-collector-actions {
+  margin-top: 12px !important;
+  justify-content: flex-end !important;
+}
+
+.vocab-lens-primary-button,
+.vocab-lens-secondary-button,
+.vocab-lens-reveal-button {
+  min-height: 36px !important;
+  padding: 0 16px !important;
+  border-radius: 18px !important;
+  cursor: pointer !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+}
+
+.vocab-lens-primary-button {
+  border: 0 !important;
+  background: #8ab4f8 !important;
+  color: #202124 !important;
+}
+
+.vocab-lens-primary-button:disabled {
+  cursor: default !important;
+  opacity: 0.48 !important;
+}
+
+.vocab-lens-secondary-button {
+  border: 1px solid #5f6368 !important;
+  background: transparent !important;
+  color: #e8eaed !important;
+}
+
+.vocab-lens-review-card {
+  padding: 20px 24px 16px !important;
+}
+
+.vocab-lens-review-meaning {
+  display: inline-block !important;
+  max-width: 100% !important;
+  min-height: 46px !important;
+  margin: 14px 0 9px !important;
+  overflow: hidden !important;
+  color: #e8eaed !important;
+  cursor: help !important;
+  filter: blur(7px) !important;
+  font-size: 18px !important;
+  line-height: 1.45 !important;
+  transition: filter 140ms ease !important;
+  user-select: none !important;
+}
+
+.vocab-lens-review-meaning:hover,
+.vocab-lens-is-revealed .vocab-lens-review-meaning {
+  filter: blur(0) !important;
+  user-select: text !important;
+}
+
+.vocab-lens-full-definitions {
+  max-height: 210px !important;
+  margin: 4px 0 12px !important;
+  padding: 5px 12px !important;
+  overflow: auto !important;
+  border: 1px solid #383c3f !important;
+  border-radius: 10px !important;
+  background: #202224 !important;
+  scrollbar-width: thin !important;
+}
+
+.vocab-lens-full-definitions[hidden] {
+  display: none !important;
+}
+
+.vocab-lens-definition-row {
+  display: grid !important;
+  grid-template-columns: 58px 1fr !important;
+  gap: 10px !important;
+  padding: 8px 0 !important;
+}
+
+.vocab-lens-definition-row + .vocab-lens-definition-row {
+  border-top: 1px solid #34383b !important;
+}
+
+.vocab-lens-part-of-speech {
+  color: #8ab4f8 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.vocab-lens-definition-meanings {
+  color: #e8eaed !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+}
+
+.vocab-lens-definition-empty {
+  padding: 8px 0 !important;
+  color: #9aa0a6 !important;
+  font-size: 12px !important;
+  text-align: center !important;
+}
+
+.vocab-lens-review-footer {
+  margin-top: 18px !important;
+}
+
+.vocab-lens-reveal-button {
+  border: 0 !important;
+  background: #2b2e30 !important;
+  color: #f1f3f4 !important;
+}
+
+.vocab-lens-review-actions {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.vocab-lens-round-button {
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  border: 1px solid transparent !important;
+  border-radius: 50% !important;
+  background: #2b2e30 !important;
+  color: #e8eaed !important;
+  cursor: pointer !important;
+  font-size: 21px !important;
+  line-height: 42px !important;
+}
+
+.vocab-lens-round-button:hover {
+  background: #3c4043 !important;
+}
+
+.vocab-lens-speak {
+  padding-left: 3px !important;
+  font-size: 16px !important;
+}
+
+.vocab-lens-play-icon {
+  display: inline-block !important;
+}
+
+.vocab-lens-playing-icon {
+  display: none !important;
+  height: 18px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 3px !important;
+}
+
+.vocab-lens-playing-icon i {
+  display: block !important;
+  width: 3px !important;
+  height: 7px !important;
+  border-radius: 2px !important;
+  background: currentColor !important;
+  animation: vocab-lens-speaking-bars 720ms ease-in-out infinite !important;
+}
+
+.vocab-lens-playing-icon i:nth-child(2) {
+  animation-delay: 120ms !important;
+}
+
+.vocab-lens-playing-icon i:nth-child(3) {
+  animation-delay: 240ms !important;
+}
+
+.vocab-lens-speak.vocab-lens-is-speaking {
+  border-color: #81c995 !important;
+  background: #274332 !important;
+  color: #a8dab5 !important;
+}
+
+.vocab-lens-speak.vocab-lens-is-speaking .vocab-lens-play-icon {
+  display: none !important;
+}
+
+.vocab-lens-speak.vocab-lens-is-speaking .vocab-lens-playing-icon {
+  display: inline-flex !important;
+}
+
+@keyframes vocab-lens-speaking-bars {
+  0%, 100% { height: 6px; }
+  50% { height: 18px; }
+}
+
+.vocab-lens-wrong:hover,
+.vocab-lens-result-unknown .vocab-lens-wrong {
+  border-color: #f28b82 !important;
+  color: #f28b82 !important;
+}
+
+.vocab-lens-known:hover,
+.vocab-lens-result-known .vocab-lens-known {
+  border-color: #81c995 !important;
+  color: #81c995 !important;
+}
+
+.vocab-lens-review-counts {
+  margin-top: 10px !important;
+  color: #9aa0a6 !important;
+  font-size: 11px !important;
+  text-align: right !important;
+}
+
+@media (prefers-color-scheme: light) {
+  .vocab-lens-highlight {
+    background: linear-gradient(transparent 8%, #fff17a 8%, #fff17a 92%, transparent 92%) !important;
+  }
+}
