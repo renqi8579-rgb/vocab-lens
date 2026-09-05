@@ -17,12 +17,13 @@ h1 { margin: 6px 0 4px; font-size: 34px; letter-spacing: -1px; }
 
 main { max-width: 1120px; margin: 0 auto; padding: 0 30px 60px; }
 
-.summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.summary { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 .summary div { padding: 18px 20px; border: 1px solid #303438; border-radius: 14px; background: rgba(31, 34, 36, 0.82); }
 .summary span, .summary strong { display: block; }
 .summary span { color: #9aa0a6; font-size: 12px; }
 .summary strong { margin-top: 4px; font-size: 28px; }
 .summary .danger-stat strong { color: #f28b82; }
+.summary .mastered-stat strong { color: #81c995; }
 
 .manual-add { margin: 18px 0; border: 1px solid #303438; border-radius: 14px; background: #1b1e20; }
 .manual-add summary { padding: 15px 18px; cursor: pointer; font-size: 14px; font-weight: 700; }
@@ -39,6 +40,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 30px 60px; }
 .word-list { display: grid; gap: 12px; }
 .word-card { padding: 20px; border: 1px solid #303438; border-left: 3px solid #4c5155; border-radius: 14px; background: #1b1e20; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12); }
 .word-card.is-difficult { border-left-color: #f28b82; }
+.word-card.is-mastered { border-left-color: #81c995; opacity: 0.82; }
 .word-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .word-card h2 { margin: 0; color: #fff; font-size: 22px; }
 .word-meta { margin-top: 3px; color: #80868b; font-size: 11px; }
@@ -46,6 +48,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 30px 60px; }
 .review-score span { padding: 4px 8px; border-radius: 12px; background: #26292b; }
 .review-score .known { color: #81c995; }
 .review-score .unknown { color: #f28b82; }
+.review-score .mastered { color: #81c995; }
 
 .edit-field { display: block; margin-top: 16px; color: #9aa0a6; font-size: 11px; }
 .edit-field textarea { display: block; width: 100%; margin-top: 5px; padding: 10px; resize: vertical; border: 1px solid #3c4043; border-radius: 8px; outline: 0; background: #111314; color: #f1f3f4; line-height: 1.5; }
@@ -60,6 +63,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 0 30px 60px; }
 .button { padding: 8px 13px; border: 1px solid transparent; border-radius: 9px; cursor: pointer; font-size: 12px; font-weight: 650; }
 .button.primary { background: #8ab4f8; color: #202124; }
 .button.secondary { border-color: #44484d; background: #242729; color: #e8eaed; }
+.button.success { border-color: rgba(129, 201, 149, 0.55); background: #274332; color: #a8dab5; }
 .button.danger { margin-left: auto; border-color: rgba(242, 139, 130, 0.45); background: transparent; color: #f28b82; }
 .button:hover { filter: brightness(1.12); }
 

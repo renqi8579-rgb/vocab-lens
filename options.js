@@ -49,9 +49,11 @@ function renderSummary() {
   const entries = Object.values(vocabulary);
   const known = entries.reduce((sum, entry) => sum + (entry.review?.known || 0), 0);
   const unknown = entries.reduce((sum, entry) => sum + (entry.review?.unknown || 0), 0);
+  const mastered = entries.filter((entry) => entry.masteredAt).length;
   const difficult = entries.filter(isDifficult).length;
 
   document.querySelector("#totalWords").textContent = entries.length;
+  document.querySelector("#masteredWords").textContent = mastered;
   document.querySelector("#totalKnown").textContent = known;
   document.querySelector("#totalUnknown").textContent = unknown;
   document.querySelector("#difficultWords").textContent = difficult;
@@ -70,6 +72,8 @@ function getVisibleEntries() {
         ...(entry.contexts || []).map((context) => context.sentence)
       ].join(" ").toLocaleLowerCase();
       if (query && !haystack.includes(query)) return false;
+      if (filter === "mastered" && !entry.masteredAt) return false;
+      if (filter === "learning" && entry.masteredAt) return false;
       if (filter === "difficult" && !isDifficult(entry)) return false;
       if (filter === "never-reviewed" && getReviewTotal(entry) !== 0) return false;
       if (filter === "last-unknown" && entry.review?.lastResult !== "unknown") return false;
@@ -86,6 +90,7 @@ function createWordCard(entry) {
   const card = document.createElement("article");
   card.className = "word-card";
   if (isDifficult(entry)) card.classList.add("is-difficult");
+  if (entry.masteredAt) card.classList.add("is-mastered");
 
   const top = document.createElement("div");
   top.className = "word-card-top";
@@ -100,6 +105,12 @@ function createWordCard(entry) {
   const score = document.createElement("div");
   score.className = "review-score";
   score.innerHTML = `<span class="known">✓ ${entry.review?.known || 0}</span><span class="unknown">× ${entry.review?.unknown || 0}</span>`;
+  if (entry.masteredAt) {
+    const badge = document.createElement("span");
+    badge.className = "mastered";
+    badge.textContent = "已掌握";
+    score.prepend(badge);
+  }
   top.append(titleArea, score);
 
   const meaningLabel = document.createElement("label");
@@ -153,6 +164,12 @@ function createWordCard(entry) {
       };
       await persist("复习统计已清空");
     }),
+    createButton(entry.masteredAt ? "恢复高亮" : "设为已掌握", entry.masteredAt ? "secondary" : "success", async () => {
+      const willMaster = !entry.masteredAt;
+      vocabulary[entry.normalized].masteredAt = willMaster ? Date.now() : null;
+      vocabulary[entry.normalized].updatedAt = Date.now();
+      await persist(willMaster ? "已标记为掌握" : "已恢复网页高亮");
+    }),
     createButton("删除", "danger", async () => {
       if (!confirm(`确定从单词本删除“${entry.word}”吗？`)) return;
       delete vocabulary[entry.normalized];
@@ -194,6 +211,7 @@ async function addManualEntry(event) {
       : (existing.contexts || []),
     createdAt: existing.createdAt || Date.now(),
     updatedAt: Date.now(),
+    masteredAt: existing.masteredAt || null,
     review: existing.review || { known: 0, unknown: 0, lastResult: null, lastReviewedAt: null }
   };
   form.reset();
@@ -263,6 +281,7 @@ function sanitizeImportedEntry(candidate) {
       : [],
     createdAt: Number(candidate.createdAt) || Date.now(),
     updatedAt: Number(candidate.updatedAt) || Date.now(),
+    masteredAt: Number(candidate.masteredAt) || null,
     review: {
       known: safeCount(candidate.review?.known),
       unknown: safeCount(candidate.review?.unknown),
@@ -320,6 +339,7 @@ function getReviewTotal(entry) {
 }
 
 function difficultyScore(entry) {
+  if (entry.masteredAt) return -1;
   const known = entry.review?.known || 0;
   const unknown = entry.review?.unknown || 0;
   if (!unknown) return 0;
@@ -327,6 +347,7 @@ function difficultyScore(entry) {
 }
 
 function isDifficult(entry) {
+  if (entry.masteredAt) return false;
   const known = entry.review?.known || 0;
   const unknown = entry.review?.unknown || 0;
   return unknown > 0 && unknown >= known;
@@ -335,7 +356,10 @@ function isDifficult(entry) {
 function formatMeta(entry) {
   const date = entry.createdAt ? new Date(entry.createdAt).toLocaleDateString("zh-CN") : "未知日期";
   const count = entry.contexts?.length || 0;
-  return `${date} 收录 · ${count} 条例句`;
+  const mastered = entry.masteredAt
+    ? ` · ${new Date(entry.masteredAt).toLocaleDateString("zh-CN")} 掌握`
+    : "";
+  return `${date} 收录 · ${count} 条例句${mastered}`;
 }
 
 function isHttpUrl(url) {

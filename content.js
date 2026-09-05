@@ -309,6 +309,7 @@
       contexts,
       createdAt: existing.createdAt || Date.now(),
       updatedAt: Date.now(),
+      masteredAt: existing.masteredAt || null,
       review: {
         known: existing.review?.known || 0,
         unknown: existing.review?.unknown || 0,
@@ -360,7 +361,7 @@
     }
 
     const entries = Object.values(state.vocabulary)
-      .filter((entry) => entry?.normalized && entry?.meaning)
+      .filter((entry) => entry?.normalized && entry?.meaning && !entry.masteredAt)
       .sort((a, b) => b.normalized.length - a.normalized.length)
       .slice(0, 800);
     if (!entries.length) {
@@ -483,6 +484,10 @@
         </div>
       </div>
       <div class="vocab-lens-review-counts" data-field="counts"></div>
+      <div class="vocab-lens-entry-actions">
+        <button type="button" class="vocab-lens-entry-button vocab-lens-master-button" data-action="master" title="停止网页高亮，但保留在单词本">已掌握</button>
+        <button type="button" class="vocab-lens-entry-button vocab-lens-delete-button" data-action="delete" title="移出单词本并停止网页高亮">删除</button>
+      </div>
     `;
     card.querySelector('[data-field="word"]').textContent = entry.word;
     card.querySelector('[data-field="meaning"]').textContent = entry.meaning;
@@ -512,6 +517,38 @@
     speakButton.addEventListener("click", () => speak(entry.word, speakButton));
     card.querySelector('[data-action="known"]').addEventListener("click", () => recordReview(key, "known"));
     card.querySelector('[data-action="unknown"]').addEventListener("click", () => recordReview(key, "unknown"));
+    card.querySelector('[data-action="master"]').addEventListener("click", () => masterVocabularyEntry(key));
+    card.querySelector('[data-action="delete"]').addEventListener("click", () => deleteVocabularyEntry(key, entry.word));
+  }
+
+  async function masterVocabularyEntry(key) {
+    const stored = await chrome.storage.local.get("vocabulary");
+    const vocabulary = stored.vocabulary || {};
+    const entry = vocabulary[key];
+    if (!entry) return;
+
+    entry.masteredAt = Date.now();
+    entry.updatedAt = Date.now();
+    await persistVocabularyAndRefresh(vocabulary);
+  }
+
+  async function deleteVocabularyEntry(key, word) {
+    if (!window.confirm(`确定从单词本删除“${word}”吗？`)) return;
+    const stored = await chrome.storage.local.get("vocabulary");
+    const vocabulary = stored.vocabulary || {};
+    if (!vocabulary[key]) return;
+
+    delete vocabulary[key];
+    await persistVocabularyAndRefresh(vocabulary);
+  }
+
+  async function persistVocabularyAndRefresh(vocabulary) {
+    await chrome.storage.local.set({ vocabulary });
+    const nextSignature = getHighlightSignature(vocabulary);
+    const shouldRefreshLocally = state.highlightSignature !== nextSignature || Boolean(state.reviewCard);
+    state.vocabulary = vocabulary;
+    state.highlightSignature = nextSignature;
+    if (shouldRefreshLocally) applyHighlights();
   }
 
   async function recordReview(key, result) {
@@ -814,7 +851,7 @@
 
   function getHighlightSignature(vocabulary) {
     return Object.values(vocabulary || {})
-      .filter((entry) => entry?.normalized && entry?.meaning)
+      .filter((entry) => entry?.normalized && entry?.meaning && !entry.masteredAt)
       .map((entry) => entry.normalized)
       .sort()
       .join("\n");

@@ -368,6 +368,39 @@
   text-align: right !important;
 }
 
+.vocab-lens-entry-actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  margin-top: 12px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid #34383b !important;
+}
+
+.vocab-lens-entry-button {
+  min-height: 36px !important;
+  padding: 0 14px !important;
+  border: 1px solid #44484d !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  color: #e8eaed !important;
+  cursor: pointer !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+}
+
+.vocab-lens-master-button:hover {
+  border-color: #81c995 !important;
+  background: #274332 !important;
+  color: #a8dab5 !important;
+}
+
+.vocab-lens-delete-button:hover {
+  border-color: #f28b82 !important;
+  background: #482b29 !important;
+  color: #f6aea8 !important;
+}
+
 @media (prefers-color-scheme: light) {
   .vocab-lens-highlight {
     background: linear-gradient(transparent 8%, #fff17a 8%, #fff17a 92%, transparent 92%) !important;

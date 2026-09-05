@@ -23,6 +23,7 @@
     <main>
       <section class="summary" aria-label="学习概览">
         <div><span>总词数</span><strong id="totalWords">0</strong></div>
+        <div class="mastered-stat"><span>已掌握</span><strong id="masteredWords">0</strong></div>
         <div><span>累计认出</span><strong id="totalKnown">0</strong></div>
         <div><span>累计未认出</span><strong id="totalUnknown">0</strong></div>
         <div class="danger-stat"><span>易忘词</span><strong id="difficultWords">0</strong></div>
@@ -42,6 +43,8 @@
         <input id="searchInput" type="search" placeholder="搜索单词、释义或例句" />
         <select id="filterSelect" aria-label="筛选">
           <option value="all">全部单词</option>
+          <option value="mastered">已掌握</option>
+          <option value="learning">学习中</option>
           <option value="difficult">易忘词</option>
           <option value="never-reviewed">从未复习</option>
           <option value="last-unknown">最近未认出</option>

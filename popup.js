@@ -60,6 +60,7 @@ function renderStats(vocabulary) {
   const entries = Object.values(vocabulary);
   const unknownCount = entries.reduce((sum, entry) => sum + (entry.review?.unknown || 0), 0);
   const difficultCount = entries.filter((entry) => {
+    if (entry.masteredAt) return false;
     const known = entry.review?.known || 0;
     const unknown = entry.review?.unknown || 0;
     return unknown > 0 && unknown >= known;

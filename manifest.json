@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Vocab Lens",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "选词翻译、自动保存例句，并在网页中高亮复习生词。",
   "permissions": ["storage", "contextMenus"],
   "host_permissions": [
-    "https://translate.googleapis.com/*"
+    "https://api.mymemory.translated.net/*"
   ],
   "background": {
     "service_worker": "background.js"
